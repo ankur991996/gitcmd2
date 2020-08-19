@@ -1,0 +1,254 @@
+Streams:
+--------------
+collection and stream:
+------------------------------
+if we want to repersent a group of object as a single entity then we should go for collection.
+
+
+if we want to process obj from the Collection-Stream.
+
+Stream s = c.stream();
+java.util.stream pkg
+
+ArrayList<Integer> l = new ArrayLIst<Integer>();
+l.add(0);
+l.add(5);
+l.add(10);
+l.add(15);
+l.add(20);
+l.add(25);
+System.out.println(l);
+List<Integer> l2=l.stream().filter(i->i%2==0).collect(Collectors.toLIst());
+System.out.println(l2);
+
+List<Integer> marks = l.stream.map(i->i+5).collect(Collectors.toLIst());
+
+System.out.println(marks);
+filter(Predicate)- only boolean
+map(Function) - for doing some operation
+list of marks
+filter base on marks : selecet only passed student
+marks.stream().filter(m- > m>=35)
+failedStudent.stram().map(i->i+5).collect(collectors.tiList);
+
+filter
+-----------
+input -- > 1o ele
+o/p 0- 10 or <=10
+
+map:
+----
+i/p: 10 ele
+o/p: 10
+
+stream()
+filter()
+map()
+collect()
+count()
+sorted()
+sorted(comparator)=>cso
+min()
+max()
+
+stream().forEach(function)
+
+public class Demo1Stream {
+	public static void main(String[] args) {
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		l.add(5);
+		l.add(40);
+		l.add(35);
+		l.add(20);
+		l.add(65);
+		System.out.println(l);
+		List<Integer> l2 = l.stream().filter(i -> i % 2 == 0).collect(Collectors.toList());
+		System.out.println(l2);
+
+		System.out.println("--------------------");
+
+		List<Integer> marks = l.stream().map(i -> i + 5).collect(Collectors.toList());
+
+		System.out.println(marks);
+
+		long failedStudent = l.stream().filter(i -> i < 35).count();
+		System.out.println(failedStudent);
+		List<Integer> sortedList1 = l.stream().sorted().collect(Collectors.toList());
+		System.out.println(sortedList1);
+		List<Integer> sortedList2 = l.stream().sorted((i1, i2) -> (i1 < i2) ? 1 : (i1 > i2) ? -1 : 0)
+				.collect(Collectors.toList());
+		System.out.println(sortedList2);
+		List<Integer> sortedList = l.stream().sorted((i1, i2) -> -i1.compareTo(i2)).collect(Collectors.toList());
+		System.out.println(sortedList);
+	}
+
+}
+
+--------------------------------------------------------------------------------------
+public class Demo2Stream {
+	public static void main(String[] args) {
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("Sunny leone");
+		l.add("Kajal agarwal");
+		l.add("Prabhas");
+		l.add("Alia bhatt");
+		l.add("Ankur verma");
+		System.out.println(l);
+		List<String> sortedList = l.stream().sorted((s1, s2) -> -s1.compareTo(s2)).collect(Collectors.toList());
+		System.out.println(sortedList);
+		List<String> sortedList1 = l.stream().sorted((s1, s2) -> {
+			int l1 = s1.length();
+			int l2 = s2.length();
+			if (l1 < l2)
+				return -1;
+			else if (l1 > l2)
+				return +1;
+			else
+				return s1.compareTo(s2);
+		}).collect(Collectors.toList());
+		System.out.println(sortedList1);
+	}
+
+}
+
+--------------------------------------------------------------------------------------
+public class Demo3Stream {
+	public static void main(String[] args) {
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		l.add(10);
+		l.add(0);
+		l.add(15);
+		l.add(5);
+		l.add(20);
+		System.out.println(l);
+		Integer min = l.stream().min((i1, i2) -> -i1.compareTo(i2)).get();
+		System.out.println(min);
+		Integer max = l.stream().max((i1, i2) -> -i1.compareTo(i2)).get();
+		System.out.println(max);
+		System.out.println("=================================");
+
+		l.stream().forEach(System.out::println);
+
+		System.out.println("=================================");
+
+		Consumer<Integer> c = i -> {
+			System.out.println("The squar of " + i + "is :" + (i * i));
+		};
+		l.stream().forEach(c);
+
+		Integer[] i = l.stream().toArray(Integer[]::new);
+		for (Integer val : i) {
+			System.out.println(val);
+		}
+		System.out.println("++++++++++++++++++++++++");
+		
+		Stream.of(i).forEach(System.out::println);
+	}
+
+}
+============================================================================
+lambda Expression:- the main objective of lambda expression is to bring benifits of functional                                 programming into java.
+
+what is lambda expression.
+it is a anonymous functions.
+name less
+without return type
+without modifires.
+
+E.g 1 : To print Hello 
+public void m1(){
+System.out.println("Hello");
+}
+
+()->{ System.out.println("hello");}
+
+if body contains only one line than we can remove '{}'
+
+()->System.out.println("Hello");
+
+
+E.g 2:
+public void m1(int a,int b){
+System.out.println(a+b);
+}
+
+(int a,int b)->{System.out.println(a+b);}
+
+if compiler will gessu the type automatically than we can remove the DataType
+
+(a,b)->{System.out.println(a+b);}
+
+
+E.g 3:
+
+public int squerInt(int n){
+return n*n;
+}
+
+(int n)->{return n*n;} //without curly bress if we'll try to return somethings than don't use return keyword.
+(int n)->{n*n;}
+(n)->n*n;
+n->n*n;
+
+public int m1(String s){
+return s.length();
+}
+
+s->s.length();
+
+How To Call lambda expression.
+
+FI-> functional Interface (interface contains only one abstract method).
+
+without curly brasses we can't use return keyword compiler will consider returned value automatically.
+
+within curly bresses if we want to return somevalue compulsary we should use return satement. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
